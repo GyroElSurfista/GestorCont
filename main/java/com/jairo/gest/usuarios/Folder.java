@@ -40,6 +40,7 @@ public class Folder {
     private ArrayList<Cuenta> cuentas;
 
     public Folder() {
+        cuentas = new ArrayList<>();
     }
 
     public Folder(int codFolder, int codUsr, String nomFolder, String descFolder, ArrayList<Cuenta> cuentas) {
@@ -49,6 +50,14 @@ public class Folder {
         this.descFolder = descFolder;
         this.cuentas = cuentas;
     }
+
+    public Folder(int codUsr, String nomFolder, String descFolder) {
+        this.codUsr = codUsr;
+        this.nomFolder = nomFolder;
+        this.descFolder = descFolder;
+        cuentas = new ArrayList<>();
+    }
+    
     
 
     public int getCodFolder() {
@@ -81,6 +90,10 @@ public class Folder {
 
     public void setDescFolder(String descFolder) {
         this.descFolder = descFolder;
+    }
+    
+    public void addCuenta(Cuenta cuenta){
+        cuentas.add(cuenta);
     }
 
     @Override
