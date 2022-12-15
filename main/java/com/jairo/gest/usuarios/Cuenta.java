@@ -56,6 +56,17 @@ public class Cuenta {
         this.uri = uri;
     }
 
+    public Cuenta(int codFolder, String nomCuenta, String usrCuenta, String contCuenta, String descCuenta, String uri) {
+        this.codFolder = codFolder;
+        this.nomCuenta = nomCuenta;
+        this.usrCuenta = usrCuenta;
+        this.contCuenta = contCuenta;
+        this.descCuenta = descCuenta;
+        this.uri = uri;
+    }
+    
+    
+
     public String getNomCuenta() {
         return nomCuenta;
     }
