@@ -18,22 +18,30 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 public class Hasher {
 
     
-    public String hash(String cont){
+    public String hash(String plainText){
         Instant begin  = Instant.now();
         
         String digest;
 
-        digest = BCrypt.hashpw(cont, BCrypt.gensalt(12));
+        digest = BCrypt.hashpw(plainText, BCrypt.gensalt(12));
         
         Instant end = Instant.now();
         
-        System.out.println("El digest obtenido para la contraseña: " + cont + "es: " + digest);
+        System.out.println("El digest obtenido para la contraseña: " + plainText + "es: " + digest);
         
         System.out.println("El tiempo que demoró el hash es: " + Duration.between(begin, end).toMillis());
         
-        System.out.println("Comprobando la contraesña: " + BCrypt.checkpw(cont, digest));
+        System.out.println("Comprobando la contraesña: " + BCrypt.checkpw(plainText, digest));
         
         return digest;
     }
     
+    
+    public boolean checkpw(String plainText, String digest){
+        boolean iguales;
+        
+        iguales = BCrypt.checkpw(plainText, digest);
+        
+        return iguales;
+    }
 }
