@@ -21,9 +21,6 @@ public class CreadorCuenta {
         this.folder = folder;
     }
 
-    
-    
-    
     public void crearCuenta(String nomCuenta, String usrCuenta, String contCuenta, String descCuenta, String uri){
         Cuenta cuenta;
         CuentaController cc;
