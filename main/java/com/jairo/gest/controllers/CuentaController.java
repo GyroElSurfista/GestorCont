@@ -6,9 +6,12 @@ package com.jairo.gest.controllers;
 
 import com.jairo.gest.encriptacion.Encriptador;
 import com.jairo.gest.usuarios.Cuenta;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.NativeQuery;
 
 /**
  *
@@ -55,4 +58,60 @@ public class CuentaController {
         
         
     }
+    
+    public Cuenta getCuenta(int codCuenta, String contM){
+        Cuenta cuenta;
+        Encriptador enc;
+        Session session;
+        
+        cuenta  = null;
+        enc     = new Encriptador();
+        session = sf.openSession();
+        
+        try{
+            
+            session.beginTransaction();
+            cuenta = session.get(Cuenta.class, codCuenta);
+            session.close();
+            
+            cuenta.setNomCuenta(enc.desencriptar(cuenta.getNomCuenta(), contM));
+            cuenta.setUsrCuenta(enc.desencriptar(cuenta.getUsrCuenta(), contM));
+            cuenta.setContCuenta(enc.desencriptar(cuenta.getContCuenta(), contM));
+            cuenta.setDescCuenta(enc.desencriptar(cuenta.getDescCuenta(), contM));
+            cuenta.setUri(enc.desencriptar(cuenta.getUri(), contM));
+            
+      
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
+        
+        
+        return cuenta;
+    
+    }
+    
+    public ArrayList<Cuenta> getCuentas(int codFolder, String contM){
+        ArrayList<Cuenta> cuentas;
+        Cuenta cuenta;
+        List<Object[]> list;
+        Session s;
+        NativeQuery q;
+        
+        cuentas = new ArrayList<>();
+        s       = sf.openSession();
+        
+        q = s.createNativeQuery("SELECT CODCUENTA FROM CUENTA WHERE CODFOLDER = :param1");
+        q.setParameter("param1", codFolder);
+        
+        list = q.list();
+        
+        for(Object[] obj : list){
+            cuenta = getCuenta((int)obj[0], contM);
+            cuentas.add(cuenta);
+        }
+        
+        
+        return cuentas;
+    }
+    
 }

@@ -123,6 +123,7 @@ public class Cuenta {
         this.uri = uri;
     }
 
+
     @Override
     public String toString() {
         return "Cuenta{" + "codCuenta=" + codCuenta + ", codFolder=" + codFolder + ", usrCuenta=" + usrCuenta + ", descCuenta=" + descCuenta + ", uri=" + uri + '}';
