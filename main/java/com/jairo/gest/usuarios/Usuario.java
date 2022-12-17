@@ -69,6 +69,10 @@ public class Usuario {
     public void setContM(String contM) {
         this.contM = contM;
     }
+
+    public void setFolders(ArrayList<Folder> folders) {
+        this.folders = folders;
+    }
     
     public void addFolder(Folder f){
         folders.add(f);

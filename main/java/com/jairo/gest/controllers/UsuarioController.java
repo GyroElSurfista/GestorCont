@@ -4,7 +4,10 @@
  */
 package com.jairo.gest.controllers;
 
+import com.jairo.gest.hashing.Hasher;
+import com.jairo.gest.usuarios.Folder;
 import com.jairo.gest.usuarios.Usuario;
+import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -26,19 +29,29 @@ public class UsuarioController {
     
     public int usuarioRegistrado(String usuario, String contM){
         int codUsr;
+        String digest;
+        Hasher hasher;
         Session s;
         NativeQuery sp;
         Object[] result;
         
+        hasher  = new Hasher();
         s       = sf.openSession();
-        sp      = s.createSQLQuery("EXECUTE VerifUsrExistIS :param1, :param2");
+        sp      = s.createSQLQuery("SELECT CODUSR, CONTM FROM USUARIO WHERE USUARIO = :param1");
         sp.setParameter("param1", usuario);
-        sp.setParameter("param2", contM);
         
         result = (Object[])(sp.uniqueResult());
         
         if(result != null){
-            codUsr = Integer.parseInt(result[0].toString());
+           
+            digest = (String)result[1];
+            
+            if(hasher.checkpw(contM, digest)){
+                codUsr = (int)result[0];
+            }else{
+                codUsr = -1;
+            }
+            
         }else{
             codUsr = -1;
         }
@@ -81,23 +94,42 @@ public class UsuarioController {
     
     }
     
+    public Usuario getUsuario(String usr, String contM){
+        Usuario usuario;
+        int     codUsuario;
+        
+        usuario = null;
+        codUsuario = usuarioRegistrado(usr, contM);
+        
+        if(codUsuario > 0){
+            usuario = getUsuario(codUsuario);
+        }
+   
+        return usuario;
+    }
+    
     public Usuario getUsuario(int codUsr){
         
         Usuario usr;
+        ArrayList<Folder> folders;
+        FolderController fc;
         
         usr = null;
-       
+        fc  = new FolderController();
         Session session = sf.openSession();
         
         try{
             
             session.beginTransaction();
-            
             usr = session.get(Usuario.class, codUsr);
-            
             session.getTransaction().commit();
+            session.close();
             
-            sf.close();
+            folders = fc.getFolders(codUsr, usr.getContM());
+            
+            usr.setFolders(folders);
+            
+            
             
         }catch(Exception e){
             e.printStackTrace();
