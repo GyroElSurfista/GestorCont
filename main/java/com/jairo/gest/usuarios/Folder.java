@@ -96,6 +96,11 @@ public class Folder {
         cuentas.add(cuenta);
     }
 
+    public void setCuentas(ArrayList<Cuenta> cuentas) {
+        this.cuentas = cuentas;
+    }
+
+    
     @Override
     public String toString() {
         return "Folder{" + "codFolder=" + codFolder + ", codUsr=" + codUsr + ", nomFolder=" + nomFolder + ", descFolder=" + descFolder + '}';
