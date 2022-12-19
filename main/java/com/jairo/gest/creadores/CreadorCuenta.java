@@ -21,7 +21,8 @@ public class CreadorCuenta {
         this.folder = folder;
     }
 
-    public void crearCuenta(String nomCuenta, String usrCuenta, String contCuenta, String descCuenta, String uri){
+    public boolean crearCuenta(String nomCuenta, String usrCuenta, String contCuenta, String descCuenta, String uri){
+        boolean exito;
         Cuenta cuenta;
         CuentaController cc;
         
@@ -30,7 +31,10 @@ public class CreadorCuenta {
         
         folder.addCuenta(cuenta);
         
-        cc.saveCuenta(cuenta, contM);
+        exito = cc.saveCuenta(cuenta, contM);
+        folder.addCuenta(cuenta);
+        return exito;
+        
     }
     
     
