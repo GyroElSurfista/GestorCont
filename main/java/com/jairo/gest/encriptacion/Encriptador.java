@@ -9,6 +9,7 @@ import com.rockaport.alice.AliceContext;
 import com.rockaport.alice.AliceContextBuilder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
  *
@@ -24,8 +25,9 @@ public class Encriptador {
         .setAlgorithm(AliceContext.Algorithm.AES)
         .setMode(AliceContext.Mode.CTR)
         .setPbkdf(AliceContext.Pbkdf.PBKDF_2_WITH_HMAC_SHA_256)
+        .setIvLength(16)
         .build();
-        
+         
         aesEnc = new Alice(aliceContext);
         charset = StandardCharsets.UTF_8;
     }
@@ -38,13 +40,14 @@ public class Encriptador {
         
         try{
                 encriptado = aesEnc.encrypt(plainText.getBytes(charset), cont.toCharArray());
-                encryptedText = new String(encriptado, charset);
+                encryptedText = new String(base64Encode(encriptado), charset);
                 
          }catch(Exception e){
              
-                System.out.println(e.toString());
+                e.printStackTrace();
          
          }
+        
         
         return encryptedText;
     }
@@ -59,15 +62,32 @@ public class Encriptador {
         try{
                 
                 
-                desencriptado = aesEnc.decrypt(encryptedText.getBytes(charset), cont.toCharArray());
+                desencriptado = aesEnc.decrypt(base64Decode(encryptedText.getBytes(charset)), cont.toCharArray());
                 plainText = new String(desencriptado, charset);
                 
          }catch(Exception e){
              
-                System.out.println(e.toString());
+                e.printStackTrace();
          
          }
         
         return plainText;
     }
+    
+    public byte[] base64Encode(byte[] plainText){
+        byte[] cipherText;
+        
+        cipherText = Base64.getEncoder().encode(plainText);
+        
+        return cipherText;
+    }
+    
+    public byte[] base64Decode(byte[] cipherText){
+        byte[] plainText;
+        
+        plainText = Base64.getDecoder().decode(cipherText);
+        
+        return plainText;
+    }
+    
 }
