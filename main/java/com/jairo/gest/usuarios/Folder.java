@@ -100,6 +100,11 @@ public class Folder {
         this.cuentas = cuentas;
     }
 
+    public ArrayList<Cuenta> getCuentas() {
+        return cuentas;
+    }
+
+    
     
     @Override
     public String toString() {
@@ -114,7 +119,8 @@ public class Folder {
         
         return clone;
     }
-    
+
+   
     
 
 }
