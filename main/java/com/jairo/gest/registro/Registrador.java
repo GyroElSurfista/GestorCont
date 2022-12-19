@@ -23,22 +23,25 @@ public class Registrador {
     public String registrarUsuario(String usuario, String contM, String confContM){
         String mensaje;
         
-        if(verif.verifUsr(usuario)){
-            mensaje = "El usuario ingresado ya se encuentra registrado";
+        if(usuario.equals("")){
+            mensaje = "Debe ingresar un usuario válido";
         }else{
-            if(!verif.verifCont(contM)){
-                mensaje = "La contraseña maestra es muy debil";
+            if(verif.verifUsr(usuario)){
+                mensaje = "El usuario ingresado ya se encuentra registrado";
             }else{
-                if(!verif.compCont(contM, confContM)){
-                    mensaje = "Las contraseñas no coinciden";
+                if(!verif.verifCont(contM)){
+                    mensaje = "La contraseña maestra es muy debil";
                 }else{
-                    
-                    regUsr(usuario, contM);
-                    mensaje = "Registro exitoso";
+                    if(!verif.compCont(contM, confContM)){
+                        mensaje = "Las contraseñas no coinciden";
+                    }else{
+
+                        regUsr(usuario, contM);
+                        mensaje = "Registro exitoso";
+                    }
                 }
             }
         }
-        
         
         return mensaje;
     }
