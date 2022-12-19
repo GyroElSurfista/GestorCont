@@ -20,15 +20,24 @@ public class CreadorFolder {
         this.usuario = usuario;
     }
     
-    public void CrearFolder(String nomFolder, String descFolder){
+    public boolean CrearFolder(String nomFolder, String descFolder){
+        boolean exito;
         Folder folder;
         FolderController fc;
         
         fc      = new FolderController();
         folder  = new Folder(usuario.getCodUsr(), nomFolder, descFolder);
         
-        fc.saveFolder(folder, usuario.getContM());
-
+        exito = fc.saveFolder(folder, usuario.getContM());
+        usuario.addFolder(folder);
+        
+        return exito;
+        
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    
     
 }

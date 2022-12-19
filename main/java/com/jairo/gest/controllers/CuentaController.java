@@ -26,11 +26,13 @@ public class CuentaController {
     }
     
     
-    public void saveCuenta(Cuenta cuenta, String contM){
+    public boolean saveCuenta(Cuenta cuenta, String contM){
+        boolean exito;
         Cuenta clone;
         Encriptador enc;
         Session session;
         
+        exito   = false;
         session = sf.openSession();
         
         
@@ -50,13 +52,14 @@ public class CuentaController {
             
             session.getTransaction().commit();
             
-            sf.close();
+            session.close();
         
+            exito = true;
         }catch(Exception e){
             System.out.println(e.toString());
         }
         
-        
+        return exito;
     }
     
     public Cuenta getCuenta(int codCuenta, String contM){

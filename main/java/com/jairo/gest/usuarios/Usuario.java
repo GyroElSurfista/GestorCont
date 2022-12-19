@@ -70,6 +70,10 @@ public class Usuario {
         this.contM = contM;
     }
 
+    public ArrayList<Folder> getFolders() {
+        return folders;
+    }
+    
     public void setFolders(ArrayList<Folder> folders) {
         this.folders = folders;
     }
