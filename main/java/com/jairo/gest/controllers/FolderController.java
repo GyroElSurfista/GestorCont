@@ -28,11 +28,13 @@ public class FolderController {
     }
     
     
-    public void saveFolder(Folder folder, String contM){
+    public boolean saveFolder(Folder folder, String contM){
+        boolean exito;
         Folder clone;
         Encriptador enc;
         Session session;
         
+        exito   = false;
         session = sf.openSession();
         
         
@@ -45,15 +47,19 @@ public class FolderController {
             
             session.beginTransaction();
             
-            session.save(clone);
+            folder.setCodFolder((Integer)session.save(clone));
             
             session.getTransaction().commit();
             
             session.close();
+            
+            exito = true;
         
         }catch(Exception e){
             System.out.println(e.toString());
         }
+        
+        return exito;
     }
     
     
@@ -94,7 +100,7 @@ public class FolderController {
     public ArrayList<Folder> getFolders(int codUsr, String contM){
         ArrayList<Folder> folders;
         Folder            f;
-        List<Object[]> list;
+        List<Integer> list;
         Session s;
         NativeQuery q;
         
@@ -106,8 +112,8 @@ public class FolderController {
         
         list = q.list();
         
-        for(Object[] obj : list){
-            f = getFolder((int)obj[0], contM);
+        for(Integer i : list){
+            f = getFolder(i, contM);
             folders.add(f);
         }
         
