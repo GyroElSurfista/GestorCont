@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.NativeQuery;
 
@@ -56,7 +57,7 @@ public class CuentaController {
         
             exito = true;
         }catch(Exception e){
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         
         return exito;
@@ -85,7 +86,7 @@ public class CuentaController {
             
       
         }catch(Exception e){
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         
         
@@ -117,4 +118,45 @@ public class CuentaController {
         return cuentas;
     }
     
+    
+    public boolean eliminarCuentas(int codFolder){
+        boolean exito;
+        
+        Session s;
+        Transaction txn;
+        NativeQuery sp;
+        
+        
+        s       = sf.openSession();
+        txn     = s.beginTransaction();
+        sp      = s.createSQLQuery("DELETE FROM CUENTA WHERE CODFOLDER = :param1");
+        sp.setParameter("param1", codFolder);
+        exito = sp.executeUpdate() >= 0;
+        txn.commit();
+        
+        return exito;
+    }
+    
+    public boolean eliminarCuenta(Cuenta cuenta){
+        boolean exito;
+        
+        Session session;
+        
+        exito   = false;
+        session = sf.openSession();
+        
+        try{
+        
+            session.beginTransaction();
+            session.delete(cuenta);
+            session.getTransaction().commit();
+            
+            exito = true;
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return exito;
+    }
 }
