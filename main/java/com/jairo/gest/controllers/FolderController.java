@@ -56,7 +56,7 @@ public class FolderController {
             exito = true;
         
         }catch(Exception e){
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         
         return exito;
@@ -91,7 +91,7 @@ public class FolderController {
             
             
         }catch(Exception e){
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         
         return folder;
@@ -119,5 +119,27 @@ public class FolderController {
         
         return folders;
         
+    }
+    
+    public boolean eliminarFolder(Folder folder){
+        boolean exito;
+        Session session;
+        
+        exito   = false;
+        session = sf.openSession();
+        
+        try{
+            session.beginTransaction();
+            session.delete(folder);
+            session.getTransaction().commit();
+            session.close();
+            
+            exito = true;
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return exito;
     }
 }
