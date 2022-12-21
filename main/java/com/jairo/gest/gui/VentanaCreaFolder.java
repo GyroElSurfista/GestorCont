@@ -66,6 +66,7 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
         setResizable(false);
 
         bg.setBackground(new java.awt.Color(203, 182, 184));
+        bg.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bg.setPreferredSize(new java.awt.Dimension(737, 467));
 
         bg2.setBackground(new java.awt.Color(31, 31, 31));
@@ -292,7 +293,7 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
         barLayout.setHorizontalGroup(
             barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barLayout.createSequentialGroup()
-                .addContainerGap(726, Short.MAX_VALUE)
+                .addContainerGap(724, Short.MAX_VALUE)
                 .addComponent(exitB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -319,7 +320,7 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
                 .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bg2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
