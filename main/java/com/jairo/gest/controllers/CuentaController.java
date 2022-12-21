@@ -97,7 +97,7 @@ public class CuentaController {
     public ArrayList<Cuenta> getCuentas(int codFolder, String contM){
         ArrayList<Cuenta> cuentas;
         Cuenta cuenta;
-        List<Object[]> list;
+        List<Integer> list;
         Session s;
         NativeQuery q;
         
@@ -109,8 +109,8 @@ public class CuentaController {
         
         list = q.list();
         
-        for(Object[] obj : list){
-            cuenta = getCuenta((int)obj[0], contM);
+        for(Integer i : list){
+            cuenta = getCuenta(i, contM);
             cuentas.add(cuenta);
         }
         
