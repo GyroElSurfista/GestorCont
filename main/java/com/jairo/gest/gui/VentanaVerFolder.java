@@ -5,6 +5,7 @@
 package com.jairo.gest.gui;
 
 
+import com.jairo.gest.eliminadores.EliminadorCuenta;
 import com.jairo.gest.usuarios.Cuenta;
 import com.jairo.gest.usuarios.Folder;
 import com.jairo.gest.usuarios.Usuario;
@@ -22,13 +23,15 @@ public class VentanaVerFolder extends javax.swing.JFrame {
 
     private Folder folder;
     private String usuario;
+    private String contM;
     private int mouseX, mouseY;
     
-    public VentanaVerFolder(String usuario, Folder folder) {
+    public VentanaVerFolder(String usuario, String contM, Folder folder) {
         setLookAndFeel();
         initComponents();
-        this.usuario = usuario;
-        this.folder = folder;
+        this.usuario    = usuario;
+        this.contM      = contM;
+        this.folder     = folder;
         setTable();
         setUsrInfo();
         setFoldInfo();
@@ -46,6 +49,9 @@ public class VentanaVerFolder extends javax.swing.JFrame {
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
+        bar = new javax.swing.JPanel();
+        exitB = new javax.swing.JPanel();
+        exitLbl = new javax.swing.JLabel();
         bg2 = new javax.swing.JPanel();
         cuentPanel = new javax.swing.JPanel();
         foldInfLbl = new javax.swing.JLabel();
@@ -59,9 +65,8 @@ public class VentanaVerFolder extends javax.swing.JFrame {
         elimCuenLbl = new javax.swing.JLabel();
         crearCuenBtn = new javax.swing.JPanel();
         crearCuenLbl = new javax.swing.JLabel();
-        bar = new javax.swing.JPanel();
-        exitB = new javax.swing.JPanel();
-        exitLbl = new javax.swing.JLabel();
+        reloadPanel = new javax.swing.JPanel();
+        reloadLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -69,7 +74,60 @@ public class VentanaVerFolder extends javax.swing.JFrame {
         setResizable(false);
 
         bg.setBackground(new java.awt.Color(203, 182, 184));
+        bg.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bg.setPreferredSize(new java.awt.Dimension(737, 467));
+
+        bar.setBackground(new java.awt.Color(203, 182, 184));
+        bar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                barMouseDragged(evt);
+            }
+        });
+        bar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                barMousePressed(evt);
+            }
+        });
+
+        exitB.setBackground(new java.awt.Color(203, 182, 184));
+        exitB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        exitB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                exitBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitBMouseExited(evt);
+            }
+        });
+
+        exitLbl.setBackground(new java.awt.Color(203, 182, 184));
+        exitLbl.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        exitLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        exitLbl.setText("X");
+        exitLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                exitLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitLblMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout exitBLayout = new javax.swing.GroupLayout(exitB);
+        exitB.setLayout(exitBLayout);
+        exitBLayout.setHorizontalGroup(
+            exitBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, exitBLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(exitLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        exitBLayout.setVerticalGroup(
+            exitBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exitLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+        );
 
         bg2.setBackground(new java.awt.Color(31, 31, 31));
 
@@ -180,6 +238,11 @@ public class VentanaVerFolder extends javax.swing.JFrame {
         elimCuenLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         elimCuenLbl.setText("Eliminar Cuenta");
         elimCuenLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        elimCuenLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                elimCuenLblMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout elimCuenBtnLayout = new javax.swing.GroupLayout(elimCuenBtn);
         elimCuenBtn.setLayout(elimCuenBtnLayout);
@@ -198,6 +261,11 @@ public class VentanaVerFolder extends javax.swing.JFrame {
         crearCuenLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         crearCuenLbl.setText("Crear Cuenta");
         crearCuenLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        crearCuenLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crearCuenLblMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout crearCuenBtnLayout = new javax.swing.GroupLayout(crearCuenBtn);
         crearCuenBtn.setLayout(crearCuenBtnLayout);
@@ -243,54 +311,28 @@ public class VentanaVerFolder extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        bar.setBackground(new java.awt.Color(203, 182, 184));
-        bar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                barMouseDragged(evt);
-            }
-        });
-        bar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                barMousePressed(evt);
-            }
-        });
+        reloadPanel.setBackground(new java.awt.Color(203, 182, 184));
 
-        exitB.setBackground(new java.awt.Color(203, 182, 184));
-        exitB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        exitB.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                exitBMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                exitBMouseExited(evt);
-            }
-        });
-
-        exitLbl.setBackground(new java.awt.Color(203, 182, 184));
-        exitLbl.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        exitLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        exitLbl.setText("X");
-        exitLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+        reloadLbl.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jairo\\Documents\\NetBeansProjects\\GestorContrasenias\\src\\main\\java\\com\\jairo\\gest\\gui\\assets\\Reload.png")); // NOI18N
+        reloadLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reloadLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                exitLblMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                exitLblMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                exitLblMouseExited(evt);
+                reloadLblMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout exitBLayout = new javax.swing.GroupLayout(exitB);
-        exitB.setLayout(exitBLayout);
-        exitBLayout.setHorizontalGroup(
-            exitBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exitLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+        javax.swing.GroupLayout reloadPanelLayout = new javax.swing.GroupLayout(reloadPanel);
+        reloadPanel.setLayout(reloadPanelLayout);
+        reloadPanelLayout.setHorizontalGroup(
+            reloadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reloadPanelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(reloadLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        exitBLayout.setVerticalGroup(
-            exitBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exitLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+        reloadPanelLayout.setVerticalGroup(
+            reloadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(reloadLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout barLayout = new javax.swing.GroupLayout(bar);
@@ -299,14 +341,29 @@ public class VentanaVerFolder extends javax.swing.JFrame {
             barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(reloadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(exitB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(barLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(bg2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         barLayout.setVerticalGroup(
             barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barLayout.createSequentialGroup()
-                .addGap(0, 8, Short.MAX_VALUE)
-                .addComponent(exitB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(barLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barLayout.createSequentialGroup()
+                        .addComponent(exitB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(barLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(reloadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bg2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
@@ -314,18 +371,12 @@ public class VentanaVerFolder extends javax.swing.JFrame {
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(bar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
-                .addComponent(bg2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
                 .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bg2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -374,6 +425,7 @@ public class VentanaVerFolder extends javax.swing.JFrame {
     }//GEN-LAST:event_exitLblMouseExited
 
     private void verCuenLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verCuenLblMouseClicked
+        VentanaVerCuenta ventana;
         Cuenta c;
         int filaSelec;
         
@@ -381,9 +433,39 @@ public class VentanaVerFolder extends javax.swing.JFrame {
         
         if(filaSelec >= 0){
             c = folder.getCuentas().get(filaSelec);
-            System.out.println(c.toString());
+            ventana = new VentanaVerCuenta(usuario, c);
+            ventana.setVisible(true);
         }
     }//GEN-LAST:event_verCuenLblMouseClicked
+
+    private void elimCuenLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elimCuenLblMouseClicked
+        EliminadorCuenta ec;
+        Cuenta cuenta;
+        int filaSelec;
+        
+        ec          = new EliminadorCuenta();
+        filaSelec   = cuentasTab.getSelectedRow();
+        
+        if(filaSelec >= 0){
+            cuenta = folder.getCuentas().get(filaSelec);
+            ec.eliminarCuenta(cuenta);
+            folder.getCuentas().remove(filaSelec);
+            setCuentas();
+        }
+        
+        
+    }//GEN-LAST:event_elimCuenLblMouseClicked
+
+    private void reloadLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reloadLblMouseClicked
+        setCuentas();
+    }//GEN-LAST:event_reloadLblMouseClicked
+
+    private void crearCuenLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearCuenLblMouseClicked
+        VentanaCreaCuenta ventana;
+        
+        ventana = new VentanaCreaCuenta(usuario, contM, folder);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_crearCuenLblMouseClicked
 
     /**
      * @param args the command line arguments
@@ -401,7 +483,7 @@ public class VentanaVerFolder extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaVerFolder("Juanito", new Folder(1, "Folder","Folder")).setVisible(true);
+                new VentanaVerFolder("Juanito","contM" ,new Folder(1, "Folder","Folder")).setVisible(true);
             }
         });
     }
@@ -429,6 +511,7 @@ public class VentanaVerFolder extends javax.swing.JFrame {
         cuentas = folder.getCuentas();
         modelo  = (DefaultTableModel) cuentasTab.getModel();
         
+        modelo.setRowCount(0);
         
         for(Cuenta c : cuentas){
             fila    = new Object[2];
@@ -472,6 +555,8 @@ public class VentanaVerFolder extends javax.swing.JFrame {
     private javax.swing.JPanel exitB;
     private javax.swing.JLabel exitLbl;
     private javax.swing.JLabel foldInfLbl;
+    private javax.swing.JLabel reloadLbl;
+    private javax.swing.JPanel reloadPanel;
     private javax.swing.JPanel usrInfo;
     private javax.swing.JLabel usrInfoLbl;
     private javax.swing.JPanel verCuenBtn;
