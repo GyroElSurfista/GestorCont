@@ -29,8 +29,6 @@ public class CreadorCuenta {
         cuenta  = new Cuenta(folder.getCodFolder(), nomCuenta, usrCuenta, contCuenta, descCuenta, uri);
         cc      = new CuentaController();
         
-        folder.addCuenta(cuenta);
-        
         exito = cc.saveCuenta(cuenta, contM);
         folder.addCuenta(cuenta);
         return exito;
