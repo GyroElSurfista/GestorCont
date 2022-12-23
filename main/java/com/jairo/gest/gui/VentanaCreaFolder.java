@@ -391,17 +391,15 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
     }//GEN-LAST:event_nomFoldTxtBoxFocusGained
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        if(nomFoldTxtBox.getText().equals("")){
-            mensajeLbl.setText("Nombre de folder inválido");
-            mensajeLbl.setVisible(true);
-        }else{
+        if(verificarLlenado()){
             if(creador.CrearFolder(nomFoldTxtBox.getText(), descFoldTxtBox.getText())){
                 mensajeLbl.setText("Folder creado exitosamente");
             }else{
                 mensajeLbl.setText("Error al crear el folder");
             }
             mensajeLbl.setVisible(true);
-        }        
+        }
+             
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void descFoldTxtBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_descFoldTxtBoxFocusGained
@@ -417,6 +415,30 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
         mensajeLbl.setVisible(false);
     }//GEN-LAST:event_descFoldTxtBoxFocusGained
 
+    private boolean verificarLlenado(){
+        boolean correcto;
+        String  mensaje;
+        
+        mensaje = null;
+        if(nomFoldTxtBox.getText().equals("") || nomFoldTxtBox.getText().equals("Nombre del folder")){
+           mensaje = "Debe introducir un nombre para el folder";
+        }
+        
+        correcto = mensaje == null;
+        
+        if(mensaje != null){
+            mensajeLbl.setText(mensaje);
+            mensajeLbl.setVisible(true);
+        }
+        
+        return correcto;
+       
+    }
+    
+    private void setUsrInfo(){
+        usrInfoLbl.setText(creador.getUsuario().getUsuario());
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -440,9 +462,7 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
     
     
     
-    private void setUsrInfo(){
-        usrInfoLbl.setText(creador.getUsuario().getUsuario());
-    }
+    
     
     private void setLookAndFeel(){
         try {
