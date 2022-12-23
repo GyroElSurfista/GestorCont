@@ -141,7 +141,6 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
 
         uriTxtBox.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         uriTxtBox.setForeground(new java.awt.Color(204, 204, 204));
-        uriTxtBox.setText("URI");
         uriTxtBox.setBorder(null);
         uriTxtBox.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         uriTxtBox.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -167,7 +166,6 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
 
         descCuentaTxtBox.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         descCuentaTxtBox.setForeground(new java.awt.Color(204, 204, 204));
-        descCuentaTxtBox.setText("Descripción de la cuenta");
         descCuentaTxtBox.setBorder(null);
         descCuentaTxtBox.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         descCuentaTxtBox.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -622,6 +620,11 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_verContPanelMouseExited
 
     private void genContLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_genContLblMouseClicked
+        contBox.setForeground(Color.black);
+        if(String.valueOf(contBox.getPassword()).equals("Contraseña de la cuenta")){
+            contBox.setText("");
+        }
+       
         VentanaGenCont ventana;
         
         ventana = new VentanaGenCont(contBox);
@@ -664,15 +667,50 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_verContLblMouseReleased
 
     private void crearLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearLblMouseClicked
-        if(creador.crearCuenta(nomCuentTxtBox.getText(), nomUsrTxtBox.getText(), String.valueOf(contBox.getPassword()), descCuentaTxtBox.getText(), uriTxtBox.getText())){
-            msjLbl.setText("Cuenta creada exitosamente");
-        }else{
-            msjLbl.setText("Error al crear la cuenta"); 
-        }
+        if(verificarLlenado()){
+            if(creador.crearCuenta(nomCuentTxtBox.getText(), nomUsrTxtBox.getText(), String.valueOf(contBox.getPassword()), descCuentaTxtBox.getText(), uriTxtBox.getText())){
+                msjLbl.setText("Cuenta creada exitosamente");
+            }else{
+                msjLbl.setText("Error al crear la cuenta"); 
+            }
+
+            msjLbl.setVisible(true);
         
-        msjLbl.setVisible(true);
+        }   
+        
+        
     }//GEN-LAST:event_crearLblMouseClicked
 
+    
+    private void setUsrInfo(){
+        usrInfoLbl.setText(usuario);
+    }
+    
+    private boolean verificarLlenado(){
+        boolean correcto;
+        String mensaje;
+        
+        correcto    = false;
+        mensaje     = null;
+        
+        if(nomCuentTxtBox.getText().equals("") || nomCuentTxtBox.getText().equals("Nombre de la cuenta")){
+            mensaje = "Debe introducir un nombre para la cuenta";
+        }else if(nomUsrTxtBox.getText().equals("") || nomUsrTxtBox.equals("Nombre de usuario de la cuenta")){
+            mensaje = "Debe introducir un nombre de usuario para la cuenta";
+        }else if(String.valueOf(contBox.getPassword()).equals("") || String.valueOf(contBox.getPassword()).equals("Contraseña de la cuenta")){
+            mensaje = "Debe introducir una contraseña para la cuenta";
+        }
+        
+        correcto = mensaje == null;
+        
+        if(mensaje != null){
+            msjLbl.setText(mensaje);
+            msjLbl.setVisible(true);
+        }
+        
+        return correcto;
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -697,9 +735,7 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
     
     
     
-    private void setUsrInfo(){
-        usrInfoLbl.setText(usuario);
-    }
+    
     
     
     private void setLookAndFeel(){
