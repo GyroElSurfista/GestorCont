@@ -392,7 +392,7 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         if(verificarLlenado()){
-            if(creador.CrearFolder(nomFoldTxtBox.getText(), descFoldTxtBox.getText())){
+            if(creador.crearFolder(nomFoldTxtBox.getText(), descFoldTxtBox.getText())){
                 mensajeLbl.setText("Folder creado exitosamente");
             }else{
                 mensajeLbl.setText("Error al crear el folder");
