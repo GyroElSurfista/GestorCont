@@ -20,15 +20,16 @@ public class VentanaEdicionCuenta extends javax.swing.JFrame {
 
     private EditorCuenta editor;
     private GenContrasenias genCont;
+    private VentanaVerFolder origen;
     private String usuario;
     private int mouseX, mouseY;
-    public VentanaEdicionCuenta(String usuario,String contM, Cuenta cuenta) {
+    public VentanaEdicionCuenta(String usuario,String contM, Cuenta cuenta, VentanaVerFolder origen) {
         setLookAndFeel();
         initComponents();
         
         this.usuario    = usuario;
         editor          = new EditorCuenta(contM, cuenta);
-        
+        this.origen     = origen;
         setUsrInfo();
         setCuentaInfo();
         
@@ -567,23 +568,14 @@ public class VentanaEdicionCuenta extends javax.swing.JFrame {
 
     private void nomCuentTxtBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomCuentTxtBoxFocusGained
         nomCuentTxtBox.setForeground(Color.black);
-        if(nomCuentTxtBox.getText().equals("Nombre de la cuenta")){
-            nomCuentTxtBox.setText("");
-        }
     }//GEN-LAST:event_nomCuentTxtBoxFocusGained
 
     private void nomUsrTxtBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomUsrTxtBoxFocusGained
-        nomUsrTxtBox.setForeground(Color.black);
-        if(nomUsrTxtBox.getText().equals("Nombre de usuario de la cuenta")){
-            nomUsrTxtBox.setText("");
-        }
+        nomUsrTxtBox.setForeground(Color.black);       
     }//GEN-LAST:event_nomUsrTxtBoxFocusGained
 
     private void uriTxtBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_uriTxtBoxFocusGained
         uriTxtBox.setForeground(Color.black);
-        if(uriTxtBox.getText().equals("URI")){
-            uriTxtBox.setText("");
-        }
     }//GEN-LAST:event_uriTxtBoxFocusGained
 
     private void uriTxtBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uriTxtBoxActionPerformed
@@ -592,9 +584,6 @@ public class VentanaEdicionCuenta extends javax.swing.JFrame {
 
     private void descCuentaTxtBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_descCuentaTxtBoxFocusGained
         descCuentaTxtBox.setForeground(Color.black);
-        if(descCuentaTxtBox.getText().equals("Descripción de la cuenta")){
-            descCuentaTxtBox.setText("");
-        }
     }//GEN-LAST:event_descCuentaTxtBoxFocusGained
 
     private void descCuentaTxtBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descCuentaTxtBoxActionPerformed
@@ -651,9 +640,6 @@ public class VentanaEdicionCuenta extends javax.swing.JFrame {
 
     private void contBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_contBoxFocusGained
         contBox.setForeground(Color.black);
-        if(String.valueOf(contBox.getPassword()).equals("Contraseña de la cuenta")){
-            contBox.setText("");
-        }
     }//GEN-LAST:event_contBoxFocusGained
 
     private void verContLblMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verContLblMousePressed
@@ -668,6 +654,7 @@ public class VentanaEdicionCuenta extends javax.swing.JFrame {
         if(verificarLlenado()){
             if(editor.editarCuenta(nomCuentTxtBox.getText(), nomUsrTxtBox.getText(), String.valueOf(contBox.getPassword()), descCuentaTxtBox.getText(), uriTxtBox.getText())){
                 msjLbl.setText("Cuenta editada exitosamente");
+                origen.setCuentas();
             }else{
                 msjLbl.setText("Error al editar la cuenta"); 
             }

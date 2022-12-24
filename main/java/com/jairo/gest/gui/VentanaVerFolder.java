@@ -491,7 +491,7 @@ public class VentanaVerFolder extends javax.swing.JFrame {
     private void crearCuenLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearCuenLblMouseClicked
         VentanaCreaCuenta ventana;
         
-        ventana = new VentanaCreaCuenta(usuario, contM, folder);
+        ventana = new VentanaCreaCuenta(usuario, contM, folder, this);
         ventana.setVisible(true);
     }//GEN-LAST:event_crearCuenLblMouseClicked
 
@@ -504,7 +504,7 @@ public class VentanaVerFolder extends javax.swing.JFrame {
         
         if(filaSelec >= 0){
             cuenta = folder.getCuentas().get(filaSelec);
-            ventana = new VentanaEdicionCuenta(usuario, contM, cuenta);
+            ventana = new VentanaEdicionCuenta(usuario, contM, cuenta, this);
             ventana.setVisible(true);
         }
         
@@ -546,7 +546,7 @@ public class VentanaVerFolder extends javax.swing.JFrame {
     }
     
     
-    private void setCuentas(){
+    public void setCuentas(){
         ArrayList<Cuenta> cuentas;
         DefaultTableModel modelo;
         Object[]          fila;
