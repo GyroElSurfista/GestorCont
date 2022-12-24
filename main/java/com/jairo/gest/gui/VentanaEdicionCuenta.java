@@ -140,7 +140,6 @@ public class VentanaEdicionCuenta extends javax.swing.JFrame {
         uriLbl.setText("URI");
 
         uriTxtBox.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        uriTxtBox.setForeground(new java.awt.Color(204, 204, 204));
         uriTxtBox.setBorder(null);
         uriTxtBox.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         uriTxtBox.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -165,7 +164,6 @@ public class VentanaEdicionCuenta extends javax.swing.JFrame {
         descCuentaLbl.setText("Descripción");
 
         descCuentaTxtBox.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        descCuentaTxtBox.setForeground(new java.awt.Color(204, 204, 204));
         descCuentaTxtBox.setBorder(null);
         descCuentaTxtBox.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         descCuentaTxtBox.addFocusListener(new java.awt.event.FocusAdapter() {
