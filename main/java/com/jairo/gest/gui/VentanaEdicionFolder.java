@@ -5,31 +5,30 @@
 package com.jairo.gest.gui;
 
 
-import com.jairo.gest.creadores.CreadorFolder;
+
+import com.jairo.gest.editores.EditorFolder;
 import com.jairo.gest.usuarios.Folder;
-import com.jairo.gest.usuarios.Usuario;
 import java.awt.Color;
-import java.awt.Component;
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 
 
 /**
  *
  * @author Jairo
  */
-public class VentanaCreaFolder extends javax.swing.JFrame {
+public class VentanaEdicionFolder extends javax.swing.JFrame {
 
-    private CreadorFolder creador;
+    private String       usuario;   
+    private EditorFolder editor;
     private int mouseX, mouseY;
-    public VentanaCreaFolder(Usuario usuario) {
+    public VentanaEdicionFolder(String usuario, String contM, Folder folder) {
         setLookAndFeel();
         initComponents();
         
-        creador = new CreadorFolder(usuario);
+        this.usuario = usuario;
+        editor = new EditorFolder(contM, folder);
         
         setUsrInfo();
-        
+        setFolderInfo();
     }
 
     /**
@@ -180,7 +179,7 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Crear Folder");
+        jLabel1.setText("Editar Folder");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -392,10 +391,10 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         if(verificarLlenado()){
-            if(creador.CrearFolder(nomFoldTxtBox.getText(), descFoldTxtBox.getText())){
-                mensajeLbl.setText("Folder creado exitosamente");
+            if(editor.editarFolder(nomFoldTxtBox.getText(), descFoldTxtBox.getText())){
+                mensajeLbl.setText("Folder editado exitosamente");
             }else{
-                mensajeLbl.setText("Error al crear el folder");
+                mensajeLbl.setText("Error al editar el folder");
             }
             mensajeLbl.setVisible(true);
         }
@@ -436,33 +435,14 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
     }
     
     private void setUsrInfo(){
-        usrInfoLbl.setText(creador.getUsuario().getUsuario());
+        usrInfoLbl.setText(usuario);
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaCreaFolder(new Usuario("Juanito","Juanito")).setVisible(true);
-            }
-        });
+    private void setFolderInfo(){
+        nomFoldTxtBox.setText(editor.getFolder().getNomFolder());
+        descFoldTxtBox.setText(editor.getFolder().getDescFolder());
     }
-    
-    
-    
-    
+   
     
     private void setLookAndFeel(){
         try {
@@ -473,13 +453,13 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaCreaFolder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaEdicionFolder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaCreaFolder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaEdicionFolder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaCreaFolder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaEdicionFolder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaCreaFolder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaEdicionFolder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
 
