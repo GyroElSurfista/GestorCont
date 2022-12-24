@@ -20,7 +20,7 @@ public class CreadorFolder {
         this.usuario = usuario;
     }
     
-    public boolean CrearFolder(String nomFolder, String descFolder){
+    public boolean crearFolder(String nomFolder, String descFolder){
         boolean exito;
         Folder folder;
         FolderController fc;
