@@ -5,10 +5,10 @@
 package com.jairo.gest.gui;
 
 
-import com.jairo.gest.creadores.CreadorCuenta;
-import com.jairo.gest.genCont.CreadorGenCont;
+
+import com.jairo.gest.editores.EditorCuenta;
 import com.jairo.gest.genCont.GenContrasenias;
-import com.jairo.gest.usuarios.Folder;
+import com.jairo.gest.usuarios.Cuenta;
 import java.awt.Color;
 
 
@@ -16,20 +16,21 @@ import java.awt.Color;
  *
  * @author Jairo
  */
-public class VentanaCreaCuenta extends javax.swing.JFrame {
+public class VentanaEdicionCuenta extends javax.swing.JFrame {
 
-    private CreadorCuenta creador;
+    private EditorCuenta editor;
     private GenContrasenias genCont;
     private String usuario;
     private int mouseX, mouseY;
-    public VentanaCreaCuenta(String usuario,String contM, Folder folder) {
+    public VentanaEdicionCuenta(String usuario,String contM, Cuenta cuenta) {
         setLookAndFeel();
         initComponents();
         
         this.usuario    = usuario;
-        creador         = new CreadorCuenta(contM, folder);
+        editor          = new EditorCuenta(contM, cuenta);
         
         setUsrInfo();
+        setCuentaInfo();
         
         msjLbl.setVisible(false);
     }
@@ -91,13 +92,12 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
         cuentaInfPanel.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
 
         cuentaInfLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        cuentaInfLbl.setText("Creacion de cuenta");
+        cuentaInfLbl.setText("Edicion de cuenta");
 
         nomCuentLbl.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
         nomCuentLbl.setText("Nombre de la cuenta");
 
         nomCuentTxtBox.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        nomCuentTxtBox.setForeground(new java.awt.Color(204, 204, 204));
         nomCuentTxtBox.setText("Nombre de la cuenta");
         nomCuentTxtBox.setBorder(null);
         nomCuentTxtBox.setMaximumSize(new java.awt.Dimension(200, 200));
@@ -120,7 +120,6 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
         nomUsrLbl.setText("Nombre de usuario");
 
         nomUsrTxtBox.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        nomUsrTxtBox.setForeground(new java.awt.Color(204, 204, 204));
         nomUsrTxtBox.setText("Nombre de usuario de la cuenta");
         nomUsrTxtBox.setBorder(null);
         nomUsrTxtBox.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -262,7 +261,6 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
         );
 
         contBox.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        contBox.setForeground(new java.awt.Color(204, 204, 204));
         contBox.setText("Contraseña de la cuenta");
         contBox.setToolTipText("");
         contBox.setBorder(null);
@@ -375,7 +373,7 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
 
         crearLbl.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         crearLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        crearLbl.setText("Crear Cuenta");
+        crearLbl.setText("Editar Cuenta");
         crearLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         crearLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -668,10 +666,10 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
 
     private void crearLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearLblMouseClicked
         if(verificarLlenado()){
-            if(creador.crearCuenta(nomCuentTxtBox.getText(), nomUsrTxtBox.getText(), String.valueOf(contBox.getPassword()), descCuentaTxtBox.getText(), uriTxtBox.getText())){
-                msjLbl.setText("Cuenta creada exitosamente");
+            if(editor.editarCuenta(nomCuentTxtBox.getText(), nomUsrTxtBox.getText(), String.valueOf(contBox.getPassword()), descCuentaTxtBox.getText(), uriTxtBox.getText())){
+                msjLbl.setText("Cuenta editada exitosamente");
             }else{
-                msjLbl.setText("Error al crear la cuenta"); 
+                msjLbl.setText("Error al editar la cuenta"); 
             }
 
             msjLbl.setVisible(true);
@@ -684,6 +682,14 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
     
     private void setUsrInfo(){
         usrInfoLbl.setText(usuario);
+    }
+    
+    private void setCuentaInfo(){
+        nomCuentTxtBox.setText(editor.getCuenta().getNomCuenta());
+        nomUsrTxtBox.setText(editor.getCuenta().getUsrCuenta());
+        contBox.setText(editor.getCuenta().getContCuenta());
+        uriTxtBox.setText(editor.getCuenta().getUri());
+        descCuentaTxtBox.setText(editor.getCuenta().getDescCuenta());
     }
     
     private boolean verificarLlenado(){
@@ -714,29 +720,8 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaCreaCuenta("Juanito","contM", new Folder());
-            }
-        });
-    }
-    
-    
-    
-    
-    
-    
+
     
     private void setLookAndFeel(){
         try {
@@ -747,13 +732,13 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaCreaCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaEdicionCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaCreaCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaEdicionCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaCreaCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaEdicionCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaCreaCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaEdicionCuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
 
