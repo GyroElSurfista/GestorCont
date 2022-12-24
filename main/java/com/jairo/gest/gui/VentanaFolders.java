@@ -55,6 +55,8 @@ public class VentanaFolders extends javax.swing.JFrame {
         elimFoldLbl = new javax.swing.JLabel();
         crearFoldBtn = new javax.swing.JPanel();
         crearFoldLbl = new javax.swing.JLabel();
+        editFoldBtn = new javax.swing.JPanel();
+        editFoldLbl = new javax.swing.JLabel();
         bar = new javax.swing.JPanel();
         exitB = new javax.swing.JPanel();
         exitLbl = new javax.swing.JLabel();
@@ -166,7 +168,7 @@ public class VentanaFolders extends javax.swing.JFrame {
         verFoldBtn.setLayout(verFoldBtnLayout);
         verFoldBtnLayout.setHorizontalGroup(
             verFoldBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(verFoldLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+            .addComponent(verFoldLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
         );
         verFoldBtnLayout.setVerticalGroup(
             verFoldBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,11 +214,34 @@ public class VentanaFolders extends javax.swing.JFrame {
         crearFoldBtn.setLayout(crearFoldBtnLayout);
         crearFoldBtnLayout.setHorizontalGroup(
             crearFoldBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(crearFoldLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+            .addComponent(crearFoldLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
         );
         crearFoldBtnLayout.setVerticalGroup(
             crearFoldBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(crearFoldLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+        );
+
+        editFoldBtn.setBackground(new java.awt.Color(255, 255, 255));
+
+        editFoldLbl.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        editFoldLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        editFoldLbl.setText("Editar Folder");
+        editFoldLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editFoldLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editFoldLblMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout editFoldBtnLayout = new javax.swing.GroupLayout(editFoldBtn);
+        editFoldBtn.setLayout(editFoldBtnLayout);
+        editFoldBtnLayout.setHorizontalGroup(
+            editFoldBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editFoldLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+        );
+        editFoldBtnLayout.setVerticalGroup(
+            editFoldBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editFoldLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout bg2Layout = new javax.swing.GroupLayout(bg2);
@@ -226,15 +251,17 @@ public class VentanaFolders extends javax.swing.JFrame {
             .addGroup(bg2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(foldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(usrInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(bg2Layout.createSequentialGroup()
                         .addComponent(verFoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(crearFoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(elimFoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(foldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(usrInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(editFoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(elimFoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         bg2Layout.setVerticalGroup(
@@ -248,7 +275,8 @@ public class VentanaFolders extends javax.swing.JFrame {
                 .addGroup(bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(verFoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(elimFoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(crearFoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(crearFoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editFoldBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -450,6 +478,20 @@ public class VentanaFolders extends javax.swing.JFrame {
         
     }//GEN-LAST:event_elimFoldLblMouseClicked
 
+    private void editFoldLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editFoldLblMouseClicked
+        VentanaEdicionFolder ventana;
+        Folder folder;
+        int filaSelec;
+        
+        filaSelec   = foldersTab.getSelectedRow();
+        
+        if(filaSelec >= 0){
+            folder = usuario.getFolders().get(filaSelec);
+            ventana = new VentanaEdicionFolder(usuario.getUsuario(), usuario.getContM(), folder);
+            ventana.setVisible(true);
+        }
+    }//GEN-LAST:event_editFoldLblMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -527,6 +569,8 @@ public class VentanaFolders extends javax.swing.JFrame {
     private javax.swing.JPanel bg2;
     private javax.swing.JPanel crearFoldBtn;
     private javax.swing.JLabel crearFoldLbl;
+    private javax.swing.JPanel editFoldBtn;
+    private javax.swing.JLabel editFoldLbl;
     private javax.swing.JPanel elimFoldBtn;
     private javax.swing.JLabel elimFoldLbl;
     private javax.swing.JPanel exitB;
