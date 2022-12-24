@@ -49,7 +49,7 @@ public class CuentaController {
             
             session.beginTransaction();
             
-            session.save(clone);
+            cuenta.setCodCuenta((Integer)session.save(clone));
             
             session.getTransaction().commit();
             
@@ -159,4 +159,41 @@ public class CuentaController {
         
         return exito;
     }
+    
+    public boolean updateCuenta(Cuenta cuenta, String contM){
+        boolean exito;
+        Cuenta clone;
+        Encriptador enc;
+        Session session;
+        
+        exito   = false;
+        session = sf.openSession();
+        
+        
+        try{
+            clone   = (Cuenta) cuenta.clone();
+            enc     = new Encriptador();
+            
+            clone.setNomCuenta(enc.encriptar(clone.getNomCuenta(), contM));
+            clone.setUsrCuenta(enc.encriptar(clone.getUsrCuenta(), contM));
+            clone.setContCuenta(enc.encriptar(clone.getContCuenta(), contM));
+            clone.setDescCuenta(enc.encriptar(clone.getDescCuenta(), contM));
+            clone.setUri(enc.encriptar(clone.getUri(), contM));
+            
+            session.beginTransaction();
+            
+            session.update(clone);
+            
+            session.getTransaction().commit();
+            
+            session.close();
+        
+            exito = true;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return exito;
+    }
+    
 }
