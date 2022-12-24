@@ -65,6 +65,8 @@ public class VentanaVerFolder extends javax.swing.JFrame {
         elimCuenLbl = new javax.swing.JLabel();
         crearCuenBtn = new javax.swing.JPanel();
         crearCuenLbl = new javax.swing.JLabel();
+        editCuenBtn = new javax.swing.JPanel();
+        editCuenLbl = new javax.swing.JLabel();
         reloadPanel = new javax.swing.JPanel();
         reloadLbl = new javax.swing.JLabel();
 
@@ -225,7 +227,7 @@ public class VentanaVerFolder extends javax.swing.JFrame {
         verCuenBtn.setLayout(verCuenBtnLayout);
         verCuenBtnLayout.setHorizontalGroup(
             verCuenBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(verCuenLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+            .addComponent(verCuenLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
         );
         verCuenBtnLayout.setVerticalGroup(
             verCuenBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,11 +273,34 @@ public class VentanaVerFolder extends javax.swing.JFrame {
         crearCuenBtn.setLayout(crearCuenBtnLayout);
         crearCuenBtnLayout.setHorizontalGroup(
             crearCuenBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(crearCuenLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+            .addComponent(crearCuenLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
         );
         crearCuenBtnLayout.setVerticalGroup(
             crearCuenBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(crearCuenLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+        );
+
+        editCuenBtn.setBackground(new java.awt.Color(255, 255, 255));
+
+        editCuenLbl.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        editCuenLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        editCuenLbl.setText("Editar Cuenta");
+        editCuenLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editCuenLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editCuenLblMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout editCuenBtnLayout = new javax.swing.GroupLayout(editCuenBtn);
+        editCuenBtn.setLayout(editCuenBtnLayout);
+        editCuenBtnLayout.setHorizontalGroup(
+            editCuenBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editCuenLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+        );
+        editCuenBtnLayout.setVerticalGroup(
+            editCuenBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editCuenLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout bg2Layout = new javax.swing.GroupLayout(bg2);
@@ -285,15 +310,17 @@ public class VentanaVerFolder extends javax.swing.JFrame {
             .addGroup(bg2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cuentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(usrInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(bg2Layout.createSequentialGroup()
                         .addComponent(verCuenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(crearCuenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(elimCuenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(cuentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(usrInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(editCuenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(elimCuenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         bg2Layout.setVerticalGroup(
@@ -307,7 +334,8 @@ public class VentanaVerFolder extends javax.swing.JFrame {
                 .addGroup(bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(verCuenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(elimCuenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(crearCuenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(crearCuenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editCuenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -467,6 +495,21 @@ public class VentanaVerFolder extends javax.swing.JFrame {
         ventana.setVisible(true);
     }//GEN-LAST:event_crearCuenLblMouseClicked
 
+    private void editCuenLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editCuenLblMouseClicked
+        VentanaEdicionCuenta ventana;
+        Cuenta cuenta;
+        int filaSelec;
+        
+        filaSelec   = cuentasTab.getSelectedRow();
+        
+        if(filaSelec >= 0){
+            cuenta = folder.getCuentas().get(filaSelec);
+            ventana = new VentanaEdicionCuenta(usuario, contM, cuenta);
+            ventana.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_editCuenLblMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -550,6 +593,8 @@ public class VentanaVerFolder extends javax.swing.JFrame {
     private javax.swing.JPanel cuentPanel;
     private javax.swing.JScrollPane cuentasSP;
     private javax.swing.JTable cuentasTab;
+    private javax.swing.JPanel editCuenBtn;
+    private javax.swing.JLabel editCuenLbl;
     private javax.swing.JPanel elimCuenBtn;
     private javax.swing.JLabel elimCuenLbl;
     private javax.swing.JPanel exitB;
