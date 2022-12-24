@@ -38,15 +38,17 @@ public class Encriptador {
         
         encryptedText = null;
         
-        try{
-                encriptado = aesEnc.encrypt(plainText.getBytes(charset), cont.toCharArray());
-                encryptedText = new String(base64Encode(encriptado), charset);
-                
-         }catch(Exception e){
-             
-                e.printStackTrace();
-         
-         }
+        if(plainText != null){
+            try{
+                    encriptado = aesEnc.encrypt(plainText.getBytes(charset), cont.toCharArray());
+                    encryptedText = new String(base64Encode(encriptado), charset);
+
+             }catch(Exception e){
+
+                    e.printStackTrace();
+
+             }
+        }
         
         
         return encryptedText;
@@ -58,18 +60,19 @@ public class Encriptador {
         byte[] desencriptado;
         
         plainText = null;
-        
-        try{
-                
-                
+        if(encryptedText != null){
+            try{
                 desencriptado = aesEnc.decrypt(base64Decode(encryptedText.getBytes(charset)), cont.toCharArray());
                 plainText = new String(desencriptado, charset);
-                
-         }catch(Exception e){
-             
+
+             }catch(Exception e){
+
                 e.printStackTrace();
-         
-         }
+
+             }
+            
+        }
+        
         
         return plainText;
     }
