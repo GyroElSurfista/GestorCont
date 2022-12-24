@@ -48,7 +48,7 @@ public class FolderController {
             session.beginTransaction();
             
             folder.setCodFolder((Integer)session.save(clone));
-            
+           
             session.getTransaction().commit();
             
             session.close();
@@ -136,6 +136,41 @@ public class FolderController {
             
             exito = true;
             
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return exito;
+    }
+    
+    
+    public boolean updateFolder(Folder folder, String contM){
+        boolean exito;
+        Folder clone;
+        Encriptador enc;
+        Session session;
+        
+        exito   = false;
+        session = sf.openSession();
+        
+        
+        try{
+            clone   = (Folder) folder.clone();
+            enc     = new Encriptador();
+            
+            clone.setNomFolder(enc.encriptar(clone.getNomFolder(), contM));
+            clone.setDescFolder(enc.encriptar(clone.getDescFolder(), contM));
+            
+            session.beginTransaction();
+            
+            session.update(clone);
+           
+            session.getTransaction().commit();
+            
+            session.close();
+            
+            exito = true;
+        
         }catch(Exception e){
             e.printStackTrace();
         }
