@@ -453,7 +453,7 @@ public class VentanaFolders extends javax.swing.JFrame {
     private void crearFoldLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearFoldLblMouseClicked
         VentanaCreaFolder ventana;
 
-        ventana = new VentanaCreaFolder(usuario);
+        ventana = new VentanaCreaFolder(usuario,this);
         ventana.setVisible(true);
     }//GEN-LAST:event_crearFoldLblMouseClicked
 
@@ -487,7 +487,7 @@ public class VentanaFolders extends javax.swing.JFrame {
         
         if(filaSelec >= 0){
             folder = usuario.getFolders().get(filaSelec);
-            ventana = new VentanaEdicionFolder(usuario.getUsuario(), usuario.getContM(), folder);
+            ventana = new VentanaEdicionFolder(usuario.getUsuario(), usuario.getContM(), folder, this);
             ventana.setVisible(true);
         }
     }//GEN-LAST:event_editFoldLblMouseClicked
@@ -523,7 +523,7 @@ public class VentanaFolders extends javax.swing.JFrame {
         usrInfoLbl.setText(usuario.getUsuario());
     }
     
-    private void setFolders(){
+    public void setFolders(){
         ArrayList<Folder> folders;
         DefaultTableModel modelo;
         Object[]          fila;

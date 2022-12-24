@@ -19,14 +19,15 @@ public class VentanaEdicionFolder extends javax.swing.JFrame {
 
     private String       usuario;   
     private EditorFolder editor;
+    private VentanaFolders origen;
     private int mouseX, mouseY;
-    public VentanaEdicionFolder(String usuario, String contM, Folder folder) {
+    public VentanaEdicionFolder(String usuario, String contM, Folder folder, VentanaFolders origen) {
         setLookAndFeel();
         initComponents();
         
         this.usuario = usuario;
         editor = new EditorFolder(contM, folder);
-        
+        this.origen = origen;
         setUsrInfo();
         setFolderInfo();
     }
@@ -376,14 +377,6 @@ public class VentanaEdicionFolder extends javax.swing.JFrame {
     }//GEN-LAST:event_descFoldTxtBoxActionPerformed
 
     private void nomFoldTxtBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomFoldTxtBoxFocusGained
-        
-        if(descFoldTxtBox.getText().equals("Descripción del folder")){
-            descFoldTxtBox.setText("");
-        }
-        if(nomFoldTxtBox.getText().equals("Nombre del folder")){
-            nomFoldTxtBox.setText("");
-        }
-        
         nomFoldTxtBox.setForeground(Color.black);
         descFoldTxtBox.setForeground(Color.black);
         mensajeLbl.setVisible(false);
@@ -393,6 +386,7 @@ public class VentanaEdicionFolder extends javax.swing.JFrame {
         if(verificarLlenado()){
             if(editor.editarFolder(nomFoldTxtBox.getText(), descFoldTxtBox.getText())){
                 mensajeLbl.setText("Folder editado exitosamente");
+                origen.setFolders();
             }else{
                 mensajeLbl.setText("Error al editar el folder");
             }
@@ -402,13 +396,6 @@ public class VentanaEdicionFolder extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void descFoldTxtBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_descFoldTxtBoxFocusGained
-        if(descFoldTxtBox.getText().equals("Descripción del folder")){
-            descFoldTxtBox.setText("");
-        }
-        if(nomFoldTxtBox.getText().equals("Nombre del folder")){
-            nomFoldTxtBox.setText("");
-        }
-        
         nomFoldTxtBox.setForeground(Color.black);
         descFoldTxtBox.setForeground(Color.black);
         mensajeLbl.setVisible(false);

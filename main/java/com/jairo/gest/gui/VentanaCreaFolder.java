@@ -21,13 +21,14 @@ import javax.swing.table.DefaultTableModel;
 public class VentanaCreaFolder extends javax.swing.JFrame {
 
     private CreadorFolder creador;
+    private VentanaFolders origen;
     private int mouseX, mouseY;
-    public VentanaCreaFolder(Usuario usuario) {
+    public VentanaCreaFolder(Usuario usuario, VentanaFolders origen) {
         setLookAndFeel();
         initComponents();
         
         creador = new CreadorFolder(usuario);
-        
+        this.origen = origen;
         setUsrInfo();
         
     }
@@ -394,6 +395,7 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
         if(verificarLlenado()){
             if(creador.crearFolder(nomFoldTxtBox.getText(), descFoldTxtBox.getText())){
                 mensajeLbl.setText("Folder creado exitosamente");
+                origen.setFolders();
             }else{
                 mensajeLbl.setText("Error al crear el folder");
             }
@@ -439,30 +441,7 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
         usrInfoLbl.setText(creador.getUsuario().getUsuario());
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaCreaFolder(new Usuario("Juanito","Juanito")).setVisible(true);
-            }
-        });
-    }
-    
-    
-    
-    
     
     private void setLookAndFeel(){
         try {
