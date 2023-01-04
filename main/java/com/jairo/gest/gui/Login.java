@@ -485,7 +485,6 @@ public class Login extends javax.swing.JFrame {
         usr = inicioS.iniciarSesion(userTextBox.getText(), String.valueOf(contTextBox.getPassword()));
         
         if(usr != null){
-            System.out.println(usr.toString());
             vf = new VentanaFolders(usr);
             vf.setVisible(true);
             this.dispose();
