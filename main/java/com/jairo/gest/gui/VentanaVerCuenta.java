@@ -8,6 +8,9 @@ package com.jairo.gest.gui;
 import com.jairo.gest.usuarios.Cuenta;
 import com.jairo.gest.usuarios.Usuario;
 import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 
 
 /**
@@ -49,13 +52,17 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
         separador1 = new javax.swing.JSeparator();
         separador2 = new javax.swing.JSeparator();
         contLbl = new javax.swing.JLabel();
-        contTxtBox = new javax.swing.JTextField();
         separador3 = new javax.swing.JSeparator();
         descCuentaLbl = new javax.swing.JLabel();
         descCuentaTxtBox = new javax.swing.JTextField();
         uriLbl = new javax.swing.JLabel();
         uriTxtBox = new javax.swing.JTextField();
         separador4 = new javax.swing.JSeparator();
+        contTextBox = new javax.swing.JPasswordField();
+        ojoPanel = new javax.swing.JPanel();
+        ojo = new javax.swing.JLabel();
+        ojoPanel1 = new javax.swing.JPanel();
+        ojo1 = new javax.swing.JLabel();
         usrInfo = new javax.swing.JPanel();
         usrInfoLbl = new javax.swing.JLabel();
         bar = new javax.swing.JPanel();
@@ -106,22 +113,6 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
         contLbl.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
         contLbl.setText("Contraseña");
 
-        contTxtBox.setEditable(false);
-        contTxtBox.setBackground(new java.awt.Color(255, 255, 255));
-        contTxtBox.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        contTxtBox.setText("Contraseña de la cuenta");
-        contTxtBox.setBorder(null);
-        contTxtBox.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                contTxtBoxFocusGained(evt);
-            }
-        });
-        contTxtBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contTxtBoxActionPerformed(evt);
-            }
-        });
-
         separador3.setForeground(new java.awt.Color(0, 0, 0));
 
         descCuentaLbl.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
@@ -165,6 +156,67 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
 
         separador4.setForeground(new java.awt.Color(0, 0, 0));
 
+        contTextBox.setEditable(false);
+        contTextBox.setBackground(new java.awt.Color(255, 255, 255));
+        contTextBox.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        contTextBox.setText("jPasswordField1");
+        contTextBox.setBorder(null);
+        contTextBox.setEchoChar('*');
+
+        ojoPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        ojo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ojo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jairo\\Documents\\NetBeansProjects\\GestorContrasenias\\src\\main\\java\\com\\jairo\\gest\\gui\\assets\\ojito.png")); // NOI18N
+        ojo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ojo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ojoMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ojoMouseReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ojoPanelLayout = new javax.swing.GroupLayout(ojoPanel);
+        ojoPanel.setLayout(ojoPanelLayout);
+        ojoPanelLayout.setHorizontalGroup(
+            ojoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ojo, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+        ojoPanelLayout.setVerticalGroup(
+            ojoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ojo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+        );
+
+        ojoPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        ojo1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ojo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ojo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/copiar.png"))); // NOI18N
+        ojo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ojo1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ojo1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ojo1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ojo1MouseReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ojoPanel1Layout = new javax.swing.GroupLayout(ojoPanel1);
+        ojoPanel1.setLayout(ojoPanel1Layout);
+        ojoPanel1Layout.setHorizontalGroup(
+            ojoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ojo1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+        ojoPanel1Layout.setVerticalGroup(
+            ojoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ojo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout cuentaInfPanelLayout = new javax.swing.GroupLayout(cuentaInfPanel);
         cuentaInfPanel.setLayout(cuentaInfPanelLayout);
         cuentaInfPanelLayout.setHorizontalGroup(
@@ -180,16 +232,21 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
                         .addComponent(uriLbl)
                         .addComponent(uriTxtBox)
                         .addComponent(separador4, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(cuentaInfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(contLbl)
-                        .addComponent(contTxtBox)
-                        .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(contLbl)
                     .addGroup(cuentaInfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(nomUsrLbl)
                         .addComponent(cuentaInfLbl)
                         .addComponent(nomUsrTxtBox, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
-                        .addComponent(separador1)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(separador1))
+                    .addGroup(cuentaInfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(cuentaInfPanelLayout.createSequentialGroup()
+                            .addComponent(contTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ojoPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(ojoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(separador2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         cuentaInfPanelLayout.setVerticalGroup(
             cuentaInfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,8 +261,11 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
                 .addComponent(separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contTxtBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(cuentaInfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ojoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(contTextBox)
+                    .addComponent(ojoPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -252,7 +312,7 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
                 .addGroup(bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(usrInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cuentaInfPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         bg2Layout.setVerticalGroup(
             bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,7 +379,7 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
         barLayout.setHorizontalGroup(
             barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barLayout.createSequentialGroup()
-                .addContainerGap(724, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(exitB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -338,7 +398,7 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
             .addGroup(bgLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(bg2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,7 +406,7 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
                 .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bg2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -398,17 +458,9 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
         
     }//GEN-LAST:event_nomUsrTxtBoxActionPerformed
 
-    private void contTxtBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contTxtBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_contTxtBoxActionPerformed
-
     private void nomUsrTxtBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomUsrTxtBoxFocusGained
         
     }//GEN-LAST:event_nomUsrTxtBoxFocusGained
-
-    private void contTxtBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_contTxtBoxFocusGained
-        
-    }//GEN-LAST:event_contTxtBoxFocusGained
 
     private void descCuentaTxtBoxFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_descCuentaTxtBoxFocusGained
         // TODO add your handling code here:
@@ -425,6 +477,31 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
     private void uriTxtBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uriTxtBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_uriTxtBoxActionPerformed
+
+    private void ojoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ojoMouseReleased
+        contTextBox.setEchoChar('*');
+    }//GEN-LAST:event_ojoMouseReleased
+
+    private void ojoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ojoMousePressed
+        contTextBox.setEchoChar((char)0);
+    }//GEN-LAST:event_ojoMousePressed
+
+    private void ojo1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ojo1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ojo1MousePressed
+
+    private void ojo1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ojo1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ojo1MouseReleased
+
+    private void ojo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ojo1MouseClicked
+        String str = String.valueOf(contTextBox.getPassword());
+        Clipboard clip = Toolkit.getDefaultToolkit()
+                             .getSystemClipboard();
+        StringSelection strse1 = new StringSelection(str);
+        clip.setContents(strse1, strse1);
+        
+    }//GEN-LAST:event_ojo1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -451,7 +528,7 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
     private void setCuentaInfo(){
         cuentaInfLbl.setText("Cuenta: " + cuenta.getNomCuenta());
         nomUsrTxtBox.setText(cuenta.getUsrCuenta());
-        contTxtBox.setText(cuenta.getContCuenta());
+        contTextBox.setText(cuenta.getContCuenta());
         uriTxtBox.setText(cuenta.getUri());
         descCuentaTxtBox.setText(cuenta.getDescCuenta());
     }
@@ -484,7 +561,7 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
     private javax.swing.JPanel bg;
     private javax.swing.JPanel bg2;
     private javax.swing.JLabel contLbl;
-    private javax.swing.JTextField contTxtBox;
+    private javax.swing.JPasswordField contTextBox;
     private javax.swing.JLabel cuentaInfLbl;
     private javax.swing.JPanel cuentaInfPanel;
     private javax.swing.JLabel descCuentaLbl;
@@ -493,6 +570,10 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
     private javax.swing.JLabel exitLbl;
     private javax.swing.JLabel nomUsrLbl;
     private javax.swing.JTextField nomUsrTxtBox;
+    private javax.swing.JLabel ojo;
+    private javax.swing.JLabel ojo1;
+    private javax.swing.JPanel ojoPanel;
+    private javax.swing.JPanel ojoPanel1;
     private javax.swing.JSeparator separador1;
     private javax.swing.JSeparator separador2;
     private javax.swing.JSeparator separador3;
