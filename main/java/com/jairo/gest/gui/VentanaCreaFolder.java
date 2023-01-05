@@ -98,7 +98,7 @@ public class VentanaCreaFolder extends javax.swing.JFrame {
         separador2.setForeground(new java.awt.Color(0, 0, 0));
 
         descFoldLbl.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
-        descFoldLbl.setText("Descripción del folder");
+        descFoldLbl.setText("Descripción del folder (Opcional)");
 
         descFoldTxtBox.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         descFoldTxtBox.setForeground(new java.awt.Color(204, 204, 204));
