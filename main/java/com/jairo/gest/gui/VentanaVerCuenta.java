@@ -27,6 +27,7 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
         
         this.usuario = usuario;
         this.cuenta = cuenta;
+        mensaje.setVisible(false);
         
         setUsrInfo();
         setCuentaInfo();
@@ -64,6 +65,7 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
         ojo1 = new javax.swing.JLabel();
         usrInfo = new javax.swing.JPanel();
         usrInfoLbl = new javax.swing.JLabel();
+        mensaje = new javax.swing.JLabel();
         bar = new javax.swing.JPanel();
         exitB = new javax.swing.JPanel();
         exitLbl = new javax.swing.JLabel();
@@ -197,6 +199,9 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ojo1MouseClicked(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ojo1MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 ojo1MousePressed(evt);
             }
@@ -302,23 +307,37 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
             .addComponent(usrInfoLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
         );
 
+        mensaje.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        mensaje.setForeground(new java.awt.Color(255, 255, 255));
+        mensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mensaje.setText("Mensaje");
+
         javax.swing.GroupLayout bg2Layout = new javax.swing.GroupLayout(bg2);
         bg2.setLayout(bg2Layout);
         bg2Layout.setHorizontalGroup(
             bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bg2Layout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
-                .addGroup(bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(usrInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(bg2Layout.createSequentialGroup()
+                        .addComponent(usrInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(cuentaInfPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         bg2Layout.setVerticalGroup(
             bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bg2Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(usrInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(bg2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bg2Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(usrInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bg2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(mensaje)
+                        .addGap(20, 20, 20)))
                 .addComponent(cuentaInfPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -500,7 +519,14 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
         StringSelection strse1 = new StringSelection(str);
         clip.setContents(strse1, strse1);
         
+        mensaje.setVisible(true);
+        mensaje.setText("Contraseña copiada al portapapeles");
+        
     }//GEN-LAST:event_ojo1MouseClicked
+
+    private void ojo1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ojo1MouseExited
+        mensaje.setVisible(false);
+    }//GEN-LAST:event_ojo1MouseExited
 
     /**
      * @param args the command line arguments
@@ -567,6 +593,7 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
     private javax.swing.JTextField descCuentaTxtBox;
     private javax.swing.JPanel exitB;
     private javax.swing.JLabel exitLbl;
+    private javax.swing.JLabel mensaje;
     private javax.swing.JLabel nomUsrLbl;
     private javax.swing.JTextField nomUsrTxtBox;
     private javax.swing.JLabel ojo;
