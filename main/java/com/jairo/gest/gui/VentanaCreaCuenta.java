@@ -137,7 +137,7 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
         separador3.setForeground(new java.awt.Color(0, 0, 0));
 
         uriLbl.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
-        uriLbl.setText("URI");
+        uriLbl.setText("URI (Opcional)");
 
         uriTxtBox.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         uriTxtBox.setForeground(new java.awt.Color(204, 204, 204));
@@ -162,7 +162,7 @@ public class VentanaCreaCuenta extends javax.swing.JFrame {
         separador5.setForeground(new java.awt.Color(0, 0, 0));
 
         descCuentaLbl.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
-        descCuentaLbl.setText("Descripción");
+        descCuentaLbl.setText("Descripción (Opcional)");
 
         descCuentaTxtBox.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         descCuentaTxtBox.setForeground(new java.awt.Color(204, 204, 204));
