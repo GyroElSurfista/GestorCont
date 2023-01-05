@@ -6,7 +6,6 @@ package com.jairo.gest.gui;
 
 
 import com.jairo.gest.creadores.CreadorCuenta;
-import com.jairo.gest.genCont.CreadorGenCont;
 import com.jairo.gest.genCont.GenContrasenias;
 import com.jairo.gest.usuarios.Folder;
 import java.awt.Color;

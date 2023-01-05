@@ -6,7 +6,6 @@ package com.jairo.gest.gui;
 
 
 import com.jairo.gest.usuarios.Cuenta;
-import com.jairo.gest.usuarios.Usuario;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -192,7 +191,7 @@ public class VentanaVerCuenta extends javax.swing.JFrame {
 
         ojo1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ojo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ojo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/copiar.png"))); // NOI18N
+        ojo1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jairo\\Documents\\NetBeansProjects\\GestorContrasenias\\src\\main\\java\\com\\jairo\\gest\\gui\\assets\\copiar.png")); // NOI18N
         ojo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ojo1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

@@ -6,12 +6,8 @@ package com.jairo.gest.gui;
 
 
 import com.jairo.gest.creadores.CreadorFolder;
-import com.jairo.gest.usuarios.Folder;
 import com.jairo.gest.usuarios.Usuario;
 import java.awt.Color;
-import java.awt.Component;
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 
 
 /**

@@ -38,7 +38,7 @@ public class Encriptador {
         
         encryptedText = null;
         
-        if(plainText != null){
+        if(plainText != null && !plainText.equals("")){
             try{
                     encriptado = aesEnc.encrypt(plainText.getBytes(charset), cont.toCharArray());
                     encryptedText = new String(base64Encode(encriptado), charset);
@@ -60,7 +60,7 @@ public class Encriptador {
         byte[] desencriptado;
         
         plainText = null;
-        if(encryptedText != null){
+        if(encryptedText != null && !encryptedText.equals("")){
             try{
                 desencriptado = aesEnc.decrypt(base64Decode(encryptedText.getBytes(charset)), cont.toCharArray());
                 plainText = new String(desencriptado, charset);
