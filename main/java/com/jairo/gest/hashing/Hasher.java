@@ -6,8 +6,6 @@ package com.jairo.gest.hashing;
 
 
 
-import java.time.Duration;
-import java.time.Instant;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 
@@ -19,19 +17,8 @@ public class Hasher {
 
     
     public String hash(String plainText){
-        Instant begin  = Instant.now();
-        
         String digest;
-
         digest = BCrypt.hashpw(plainText, BCrypt.gensalt(12));
-        
-        Instant end = Instant.now();
-        
-        System.out.println("El digest obtenido para la contraseña: " + plainText + "es: " + digest);
-        
-        System.out.println("El tiempo que demoró el hash es: " + Duration.between(begin, end).toMillis());
-        
-        System.out.println("Comprobando la contraesña: " + BCrypt.checkpw(plainText, digest));
         
         return digest;
     }
