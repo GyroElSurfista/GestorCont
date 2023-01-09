@@ -5,4 +5,4 @@ El presente repositorio incluye las clases empleadas para la realización de un 
 ## Repositorio con el proyecto completo
 Para descargar el proyecto completo dirigirse al siguiente repositorio:
 
-https://github.com/GyroElSurfista/GestorCont_Completo
+https://github.com/GyroElSurfista/ProyectoGestorCont
